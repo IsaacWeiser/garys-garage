@@ -1,7 +1,7 @@
 using System;
 namespace Garage
 {
-    public class Zero : Vehicle // Electric motorcycle
+    public class Zero : Vehicle, IElectricVehicle // Electric motorcycle
     {
         public double BatteryKWh { get; set; }
 
@@ -24,7 +24,12 @@ namespace Garage
 
         public void ChargeBattery()
         {
-            // method definition omitted
+            BatteryKWh = 100.0;
+        }
+
+        public double CurrentChargePercentage()
+        {
+            return BatteryKWh;
         }
     }
 }

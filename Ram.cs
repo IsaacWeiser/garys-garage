@@ -1,7 +1,7 @@
 using System;
 namespace Garage
 {
-    public class Ram : Vehicle  // Gas powered truck
+    public class Ram : Vehicle, IGasVehicle  // Gas powered truck
     {
         public double FuelCapacity { get; set; }
 
@@ -22,7 +22,12 @@ namespace Garage
         }
         public void RefuelTank()
         {
-            // method definition omitted
+            FuelCapacity = 100.0;
+        }
+
+        public double CurrentTankPercentage()
+        {
+            return FuelCapacity;
         }
     }
 }

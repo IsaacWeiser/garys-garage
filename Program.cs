@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Garage
 {
@@ -6,45 +7,56 @@ namespace Garage
     {
         static void Main(string[] args)
         {
-            Zero fxs = new Zero()
-            {
-                MainColor = "Pink",
-                MaximumOccupancy = 2,
-                BatteryKWh = 16.4
+            Zero fxs = new Zero();
+            Zero fx = new Zero();
+            Tesla modelS = new Tesla();
 
-            };
-            Tesla modelS = new Tesla()
-            {
-                MainColor = "White",
-                MaximumOccupancy = 5,
-                BatteryKWh = 8.3
-            };
-            Cessna mx410 = new Cessna()
-            {
-                MainColor = "Purple",
-                MaximumOccupancy = 4,
-                FuelCapacity = 1.2
-            };
-            Ram bigBoi = new Ram()
-            {
-                MainColor = "Blue",
-                MaximumOccupancy = 5,
-                FuelCapacity = 5.9
+            List<IElectricVehicle> electricVehicles = new List<IElectricVehicle>() {
+                fx, fxs, modelS
+              };
 
-            };
+            Console.WriteLine("Electric Vehicles");
+            foreach (IElectricVehicle ev in electricVehicles)
+            {
+                Console.WriteLine($"{ev.CurrentChargePercentage()}");
+            }
 
-            fxs.Drive();
-            fxs.Turn("left");
-            fxs.Stop();
-            modelS.Drive();
-            modelS.Turn("left");
-            modelS.Stop();
-            mx410.Drive();
-            mx410.Turn("left");
-            mx410.Stop();
-            bigBoi.Drive();
-            bigBoi.Turn("left");
-            bigBoi.Stop();
+            foreach (IElectricVehicle ev in electricVehicles)
+            {
+                // This should charge the vehicle to 100%
+                ev.ChargeBattery();
+            }
+
+            foreach (IElectricVehicle ev in electricVehicles)
+            {
+                Console.WriteLine($"{ev.CurrentChargePercentage()}");
+            }
+
+            /***********************************************/
+
+            Ram ram = new Ram();
+            Cessna cessna150 = new Cessna();
+
+            List<IGasVehicle> gasVehicles = new List<IGasVehicle>() {
+                ram, cessna150
+              };
+
+            Console.WriteLine("Gas Vehicles");
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                Console.WriteLine($"{gv.CurrentTankPercentage()}");
+            }
+
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                // This should completely refuel the gas tank
+                gv.RefuelTank();
+            }
+
+            foreach (IGasVehicle gv in gasVehicles)
+            {
+                Console.WriteLine($"{gv.CurrentTankPercentage()}");
+            }
         }
     }
 }

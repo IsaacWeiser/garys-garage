@@ -1,13 +1,13 @@
 using System;
 namespace Garage
 {
-    public class Cessna : Vehicle  // Propellor light aircraft
+    public class Cessna : Vehicle, IGasVehicle  // Propellor light aircraft
     {
         public double FuelCapacity { get; set; }
 
         public void RefuelTank()
         {
-            // method definition omitted
+            FuelCapacity = 100.0;
         }
         public override void Turn(string direction)
         {
@@ -23,6 +23,11 @@ namespace Garage
         public override void Drive()
         {
             Console.WriteLine($"the {MainColor} Plane goes Zooooooooom!");
+        }
+
+        public double CurrentTankPercentage()
+        {
+            return FuelCapacity;
         }
     }
 }
